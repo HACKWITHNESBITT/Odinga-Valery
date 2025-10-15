@@ -57,13 +57,10 @@ function eraseText() {
    Scroll to Home on Page Load
 ========================= */
 window.addEventListener("load", () => {
-    // Scroll smoothly to the Home section
     const homeSection = document.getElementById("home");
     if (homeSection) {
         homeSection.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-
-    // Start typewriter effect after scrolling
     typeWriter();
 });
 
@@ -89,45 +86,29 @@ window.addEventListener('scroll', () => {
         }
     });
 
-    // Show back-to-top button
     const backToTop = document.getElementById('backToTop');
-    if (pageYOffset > 300) {
-        backToTop.style.display = 'block';
-    } else {
-        backToTop.style.display = 'none';
-    }
+    backToTop.style.display = pageYOffset > 300 ? 'block' : 'none';
 });
 
-// Back to Top Button
 const backToTopBtn = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.style.display = 'block';
-    } else {
-        backToTopBtn.style.display = 'none';
-    }
-});
-
 backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-
 /* =========================
-   Optional Floating Shapes / Particle Effects
+   Floating Shapes
 ========================= */
 function createFloatingShape() {
     const shape = document.createElement('div');
     shape.style.position = 'fixed';
     shape.style.width = `${Math.random() * 15 + 10}px`;
     shape.style.height = shape.style.width;
-    shape.style.backgroundColor = 'rgba(183, 75, 255, 0.2)'; // Purple
+    shape.style.backgroundColor = 'rgba(183, 75, 255, 0.2)';
     shape.style.borderRadius = '50%';
     shape.style.left = `${Math.random() * window.innerWidth}px`;
     shape.style.top = `${Math.random() * window.innerHeight}px`;
     shape.style.pointerEvents = 'none';
-    shape.style.zIndex = '0'; // Behind content
+    shape.style.zIndex = '0';
     shape.style.transition = 'transform 10s linear';
     document.body.appendChild(shape);
 
@@ -135,10 +116,52 @@ function createFloatingShape() {
         shape.style.transform = `translateY(${window.innerHeight + 100}px)`;
     }, 50);
 
-    setTimeout(() => {
-        shape.remove();
-    }, 10500);
+    setTimeout(() => { shape.remove(); }, 10500);
 }
 
-// Create floating shapes every 1 second
 setInterval(createFloatingShape, 1000);
+
+/* =========================
+   Contact Form using EmailJS
+========================= */
+const form = document.getElementById("contactForm");
+const status = document.getElementById("form-status");
+
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = form.user_name.value.trim();
+        const email = form.user_email.value.trim();
+        const message = form.message.value.trim();
+
+        if (!name || !email || !message) {
+            status.style.color = "#ff4d4d";
+            status.textContent = "Please fill all fields.";
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            status.style.color = "#ff4d4d";
+            status.textContent = "Please enter a valid email.";
+            return;
+        }
+
+        // EmailJS send
+        emailjs.send("service_kufkgqa", "template_huea5yh", {
+            from_name: name,
+            from_email: email,
+            message: message
+        })
+            .then(function (response) {
+                status.style.color = "#00ff99";
+                status.textContent = "Message sent successfully!";
+                form.reset();
+            }, function (error) {
+                status.style.color = "#ff4d4d";
+                status.textContent = "Failed to send message. Please try again later.";
+                console.error("EmailJS error:", error);
+            });
+    });
+}
