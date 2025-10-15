@@ -1,4 +1,6 @@
-/* Base Styling */
+/* =========================
+   Base Styling
+========================= */
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +15,9 @@ body {
     overflow-x: hidden;
 }
 
-/* Navbar */
+/* =========================
+   Navbar
+========================= */
 nav {
     width: 100%;
     display: flex;
@@ -57,7 +61,9 @@ nav {
     display: none;
 }
 
-/* Back to Top Button */
+/* =========================
+   Back to Top Button
+========================= */
 #backToTop {
     display: none;
     position: fixed;
@@ -81,7 +87,9 @@ nav {
     transform: translateY(-5px);
 }
 
-/* Section Layout */
+/* =========================
+   Sections Layout
+========================= */
 section {
     min-height: 100vh;
     padding: 120px 10%;
@@ -91,7 +99,6 @@ section {
     flex-direction: column;
 }
 
-/* Main Container */
 .main-container {
     display: flex;
     align-items: center;
@@ -100,20 +107,9 @@ section {
     flex-wrap: wrap;
 }
 
-/* IMAGE POSITIONING CHANGE FOR MOBILE */
-@media (max-width: 1024px) {
-    .main-container {
-        flex-direction: column;
-        /* stack image on top for smaller screens */
-    }
-
-    .image {
-        order: -1;
-        /* move image above content */
-    }
-}
-
-/* Image Styling */
+/* =========================
+   Image Styling
+========================= */
 .image img {
     width: 280px;
     height: 280px;
@@ -129,10 +125,13 @@ section {
     box-shadow: 0 0 35px #b74bff, 0 0 70px #b74bff;
 }
 
-/* Content Styling */
+/* =========================
+   Content Styling
+========================= */
 .content {
     flex: 1;
     max-width: 550px;
+    text-align: center;
 }
 
 .content h1 {
@@ -162,11 +161,15 @@ section {
     color: #ddd;
 }
 
-/* Social Links */
+/* =========================
+   Social Links
+========================= */
 .social-links {
     display: flex;
     gap: 15px;
     margin-bottom: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .social-links a {
@@ -180,7 +183,9 @@ section {
     transform: translateY(-5px);
 }
 
-/* Button */
+/* =========================
+   Buttons
+========================= */
 .btn {
     display: inline-block;
     background-color: #b74bff;
@@ -197,7 +202,9 @@ section {
     transform: translateY(-3px);
 }
 
-/* Section Titles */
+/* =========================
+   Section Titles
+========================= */
 section h2 {
     font-size: 2rem;
     margin-bottom: 30px;
@@ -205,7 +212,9 @@ section h2 {
     text-align: center;
 }
 
-/* Skills Section */
+/* =========================
+   Skills Section
+========================= */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
@@ -218,7 +227,12 @@ section h2 {
     flex-direction: column;
     align-items: center;
     font-size: 1.2rem;
-    transition: transform 0.3s ease, color 0.3s ease;
+    background-color: #111;
+    border: 2px solid #b74bff;
+    padding: 15px;
+    border-radius: 12px;
+    width: 180px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     cursor: default;
 }
 
@@ -229,28 +243,32 @@ section h2 {
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.skill:hover i,
-.skill:hover span {
+.skill-name {
+    font-weight: bold;
     color: #b74bff;
-    transform: translateY(-5px);
+    margin-bottom: 5px;
 }
 
-/* Center Home Section Text and Socials */
-#home .content {
+.skill-desc {
+    font-size: 0.85rem;
     text-align: center;
-    /* Center heading, paragraph, typewriter */
+    color: #ccc;
 }
 
-#home .social-links {
-    justify-content: center;
-    /* Center social icons */
-    margin-bottom: 20px;
-    /* Keep spacing below text */
-    flex-wrap: wrap;
-    /* Ensure social icons stack if needed on smaller screens */
+.skill:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 20px #b74bff, 0 0 40px #b74bff;
+    background-color: #1a0a3c;
 }
 
-/* Services Section */
+.skill:hover i {
+    color: #fff;
+    transform: scale(1.2);
+}
+
+/* =========================
+   Services Section
+========================= */
 .services-container {
     display: flex;
     flex-wrap: wrap;
@@ -274,7 +292,9 @@ section h2 {
     box-shadow: 0 0 25px #b74bff, 0 0 50px #b74bff;
 }
 
-/* Contact Form */
+/* =========================
+   Contact Form
+========================= */
 #contact form {
     display: flex;
     flex-direction: column;
@@ -307,7 +327,15 @@ section h2 {
     align-self: center;
 }
 
-/* Responsive Styling */
+#form-status {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* =========================
+   Responsive Styling
+========================= */
 @media (max-width: 1024px) {
     section {
         padding: 100px 5%;
@@ -354,15 +382,6 @@ section h2 {
     }
 
     .content p {
-        font-size: 0.95rem;
-    }
-
-    .social-links {
-        justify-content: center;
-    }
-
-    .btn {
-        padding: 10px 25px;
         font-size: 0.95rem;
     }
 
